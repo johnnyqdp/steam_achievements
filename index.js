@@ -134,7 +134,7 @@ function pegarAchievements() {
             } catch (e) {
                 
             }                            
-        });
+        });        
 
     })
 }

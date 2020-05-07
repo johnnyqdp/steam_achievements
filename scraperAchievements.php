@@ -3,15 +3,16 @@ $username = $_GET['username'];
 $gameId = $_GET['gameId'];
 header("Access-Control-Allow-Origin: *");
 
+
 $url = 'https://steamcommunity.com/id/'.$username.'/stats/'.$gameId.'/?tab=achievements';
 $html = file_get_contents($url);
-
 
 $arr = explode('<meta name="Description" content="', $html);
 $parte1 = $arr[1];
 $parte2 = explode(' of ', $parte1);
 
 $conquistasPegas = $parte2[0];
+
 
 $parte3 = explode(' (', $parte2[1]);
 
@@ -38,12 +39,29 @@ if ((empty($porcentagem) && $porcentagem != "0") || (empty($conquistasPegas) && 
     $porcentagem = $parte4[0];
 }
 
+if ((empty($porcentagem) && $porcentagem != "0") || (empty($conquistasPegas) && $conquistasPegas != "0") || (empty($conquistasTotais)) && $conquistasTotais != "0") {
+    $arr = explode('<div class="achievementStatusLeft">Personal Achievements Earned:</div>', $html);
+    $parte1 = $arr[1];
+    $parte2 = explode(' of ', $parte1);
 
-$color = "blue";
+    $conquistasPegas = $parte2[0];
+
+    $parte3 = explode(' (', $parte2[1]);
+
+    $conquistasTotais = $parte3[0];
+
+    $parte4 = explode('%', $parte3[1]);
+
+    $porcentagem = $parte4[0];
+}
+
+$conquistasPegas = ltrim($conquistasPegas);
+
+$color = "#99b3e6";
 if ($porcentagem == "100") {
-    $color = "green";
+    $color = "#8cd98c";
 } else if ($porcentagem < 7) {
-    $color = "red";
+    $color = "#ff6666";
 }
 
 $retorno = '<div class="topSummaryAchievements" id="topSummaryAchievements" style="margin-right:10px">
@@ -55,11 +73,11 @@ $retorno = '<div class="topSummaryAchievements" id="topSummaryAchievements" styl
 
 
 if ((empty($porcentagem) && $porcentagem != "0") || (empty($conquistasPegas) && $conquistasPegas != "0") || (empty($conquistasTotais)) && $conquistasTotais != "0") {
-    $retorno = '<span style="color:blue">Este jogo não possui conquistas.</span>';
+    $retorno = '<span style="color:#99b3e6">Este jogo não possui conquistas.</span>';
 }
 
-if (strlen($porcentagem) > 9 || strlen($conquistasPegas) > 9 || strlen($conquistasTotais) > 9) {
-    $retorno = '<span style="color:blue">Este jogo não possui conquistas.</span>';
+if (strlen($porcentagem) > 9 || strlen($conquistasPegas) > 9 || strlen($conquistasTotais) > 9 || $conquistasTotais == "0") {
+    $retorno = '<span style="color:#99b3e6">Este jogo não possui conquistas.</span>';
 }
 
 echo $retorno;
