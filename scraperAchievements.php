@@ -6,11 +6,6 @@ header("Access-Control-Allow-Origin: *");
 $url = 'https://steamcommunity.com/id/'.$username.'/stats/'.$gameId.'/?tab=achievements';
 $html = file_get_contents($url);
 
-if ($gamedId == 'ResidentEvilRevelationsBiohazardRevelationsUE') {
-    $a = "a";
-}
-
-//echo $html;
 
 $arr = explode('<meta name="Description" content="', $html);
 $parte1 = $arr[1];
@@ -60,6 +55,10 @@ $retorno = '<div class="topSummaryAchievements" id="topSummaryAchievements" styl
 
 
 if ((empty($porcentagem) && $porcentagem != "0") || (empty($conquistasPegas) && $conquistasPegas != "0") || (empty($conquistasTotais)) && $conquistasTotais != "0") {
+    $retorno = '<span style="color:blue">Este jogo não possui conquistas.</span>';
+}
+
+if (strlen($porcentagem) > 9 || strlen($conquistasPegas) > 9 || strlen($conquistasTotais) > 9) {
     $retorno = '<span style="color:blue">Este jogo não possui conquistas.</span>';
 }
 
