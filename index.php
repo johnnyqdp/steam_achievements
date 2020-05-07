@@ -30,6 +30,9 @@ header("Access-Control-Allow-Origin: *");
     <meta name="msapplication-config" content="browserconfig.xml">
 
     <link rel="stylesheet" type="text/css" href="./index.css"></link>
+
+    <link rel="stylesheet" type="text/css" href="./loading-bar.css"/>
+    
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -42,23 +45,110 @@ header("Access-Control-Allow-Origin: *");
 
 <body>     
     <div class="content">
+        <h2 class="texto" style="margin-bottom:20px">Estatísticas de <span id="nomeUsuario"><i class="fa fa-spin fa-spinner texto"></i></span></h2>
         <div class="box" id="box">
-
+        
             <div class="joguinho" id="game_304240">
                 <div style="display: flex">
                     <div class="logo">
-                        <img src="https://steamcdn-a.akamaihd.net/steam/apps/304240/capsule_184x69.jpg" id="delayedimage_game_logo_304240_0">
                     </div>
 
                     <div class="negocinhos">               
-                        <h4 class="texto" style="margin-bottom:-20px">Resident Evil / biohazard HD REMASTER</h4>
+                        <h4 class="texto" style="margin-bottom:-20px"></h4>
                         <br>
-                        <span class="texto">172 horas registradas</span>
+                        <span class="texto"></span>
                     </div>
                 </div>
 
-                <div class="achievementsContainer">
-                    <i class="fa fa-spin fa-4x fa-spinner texto" style="margin-right: 40px"></i>
+            </div>
+            <div class="joguinho" id="game_304240">
+                <div style="display: flex">
+                    <div class="logo">
+                    </div>
+
+                    <div class="negocinhos">               
+                        <h4 class="texto" style="margin-bottom:-20px"></h4>
+                        <br>
+                        <span class="texto"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="joguinho" id="game_304240">
+                <div style="display: flex">
+                    <div class="logo">
+                    </div>
+
+                    <div class="negocinhos">               
+                        <h4 class="texto" style="margin-bottom:-20px"></h4>
+                        <br>
+                        <span class="texto"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="joguinho" id="game_304240">
+                <div style="display: flex">
+                    <div class="logo">
+                    </div>
+
+                    <div class="negocinhos">               
+                        <h4 class="texto" style="margin-bottom:-20px"></h4>
+                        <br>
+                        <span class="texto"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="joguinho" id="game_304240">
+                <div style="display: flex">
+                    <div class="logo">
+                    </div>
+
+                    <div class="negocinhos">               
+                        <h4 class="texto" style="margin-bottom:-20px"></h4>
+                        <br>
+                        <span class="texto"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="joguinho" id="game_304240">
+                <div style="display: flex">
+                    <div class="logo">
+                    </div>
+
+                    <div class="negocinhos">               
+                        <h4 class="texto" style="margin-bottom:-20px"></h4>
+                        <br>
+                        <span class="texto"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="joguinho" id="game_304240">
+                <div style="display: flex">
+                    <div class="logo">
+                    </div>
+
+                    <div class="negocinhos">               
+                        <h4 class="texto" style="margin-bottom:-20px"></h4>
+                        <br>
+                        <span class="texto"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="joguinho" id="game_304240">
+                <div style="display: flex">
+                    <div class="logo">
+                    </div>
+
+                    <div class="negocinhos">               
+                        <h4 class="texto" style="margin-bottom:-20px"></h4>
+                        <br>
+                        <span class="texto"></span>
+                    </div>
                 </div>
 
             </div>
@@ -70,11 +160,12 @@ header("Access-Control-Allow-Origin: *");
 
     <div id="textoModalLogin" style="display:none">
         <label for="nickname">Nick do usuário steam:</label>
-        <input type="text" class="form-control" id="nicknameFormInput" aria-describedby="nickname" placeholder="XxNegaoDoZapxX" maxlength="50" onchange="changeName(this.value)">
+        <input type="text" class="form-control" id="nicknameFormInput" aria-describedby="nickname" placeholder="JoaozinhoGameplays" maxlength="50" onchange="changeName(this.value)">
         <small class="form-text text-muted">Este deve ser o nick que aparece na url da steam ao abrir o perfil. Por exemplo: steamcommunity.com/id/<b>coffeepills</b></small>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./loading-bar.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>

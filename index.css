@@ -87,6 +87,17 @@ hr {
     justify-content: space-between;
 }
 
+.joguinho2 {
+    min-height: 69px;
+    height: auto;
+    margin-bottom: 4px;
+    background: rgba(54, 54, 54, 0.2);
+    padding: 8px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+
 .texto{
     color: white;
 }

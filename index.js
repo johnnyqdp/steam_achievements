@@ -1,7 +1,17 @@
 var games;
 var username;
+var url;
 
 $(document).ready(function() {
+
+    setTimeout(function(){
+        document.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+              $('.botaoProsseguir').click();
+            }
+        });
+    }, 2000);
+    
 
     bootbox.dialog({
         message: $("#textoModalLogin").html(),
@@ -9,15 +19,16 @@ $(document).ready(function() {
         title: "Bem-vindo ao SteamAchievements!",
         headerCloseButton: null, 
         backdrop: "static",
-        keyboard: false,
+        //keyboard: false,
         buttons:{
             ok:{
                 label: 'Prosseguir',
                 className: 'btn btn-outline-primary botaoProsseguir',
-                callback: function () {
+                callback: function() {
                     if (username) {
-                        adicionarIconeLoading();                
-                        $.get("scraper.php?username=" + username, null, function (data) {
+                        adicionarIconeLoading(); 
+                        url = "scraper.php?username=" + username;
+                        $.get(url, null, function (data) {
                             try {
                                 games = JSON.parse(data);
                                 percorrerJogos(games);
@@ -35,7 +46,7 @@ $(document).ready(function() {
                     } else {
                         return false;
                     }
-                }
+                },
             },
         }
     })
@@ -60,8 +71,19 @@ function changeName (name) {
 
 function percorrerJogos (games) {
     $('#box').html('');
+    if (games.length == 0) {
+        $('#box').html('<span style="display:flex;align-items:center;justify-content:center;text-align:center" class="texto">Não encontrei nenhum jogo... <br>A url que tentei acessar foi: https://steamcommunity.com/id/' + username + '/games/?tab=all <br>Provavelmente o perfil deste jogador está privado! :(</span>');
+    }
     games.forEach(function (data, i) {
-        let html = `<div class="joguinho" id="game_` + data.appid + `">
+        let horas = "0";
+        if (data.hours_forever) {
+            horas = data.hours_forever;
+        }
+        let nomeClasse = "joguinho";
+        if ((i % 2) == 1) {
+            nomeClasse += "2";
+        }
+        let html = `<div class="` + nomeClasse + `" id="game_` + data.appid + `">
                         <div style="display: flex">
                             <div class="logo">
                                 <img src="` + data.logo + `">
@@ -70,7 +92,7 @@ function percorrerJogos (games) {
                             <div class="negocinhos">               
                                 <h4 class="texto" style="margin-bottom:-20px">` + data.name + `</h4>
                                 <br>
-                                <span class="texto">` + data.hours_forever + ` horas de jogo</span>
+                                <span class="texto">` + horas + ` horas de jogo</span>
                             </div>
                         </div>
 
@@ -80,5 +102,17 @@ function percorrerJogos (games) {
 
                     </div>`
         $('#box').append(html);
+    });
+    adicionaNome();    
+}
+
+function adicionaNome() {
+    let a = "scraperNome.php?username=" + username;
+    $.get(a, null, function (data) {
+        try {
+            $("#nomeUsuario").html(data);
+        } catch (e) {
+            
+        }                            
     });
 }
