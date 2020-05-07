@@ -85,6 +85,7 @@ hr {
     overflow: hidden;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .joguinho2 {
@@ -96,6 +97,7 @@ hr {
     overflow: hidden;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .texto{
@@ -104,4 +106,20 @@ hr {
 
 .negocinhos {
     margin-left: 15px;
+}
+
+.achieveBar {
+    background: #3a3a3a;
+    padding: 1px;
+    border: 1px solid #aeaeae;
+}
+
+.achieveBarProgress {
+    height: 8px;
+    background-color: blue;
+}
+
+.topSummaryAchievements {
+    min-width: 300px;
+    width: 300px;
 }

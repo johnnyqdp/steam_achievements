@@ -96,14 +96,18 @@ function percorrerJogos (games) {
                             </div>
                         </div>
 
-                        <div class="achievementsContainer">
+                        <div class="achievementsContainer" id="achievementsContainer_` + data.appid + `">
                             <i class="fa fa-spin fa-4x fa-spinner texto" style="margin-right: 40px"></i>
                         </div>
 
                     </div>`
         $('#box').append(html);
     });
-    adicionaNome();    
+
+    adicionaNome();
+    
+    pegarAchievements(games);
+
 }
 
 function adicionaNome() {
@@ -116,3 +120,88 @@ function adicionaNome() {
         }                            
     });
 }
+
+function pegarAchievements() {
+
+    games.forEach( function (data, i) {
+        let gameId = data.friendlyURL;
+        let idHtml = data.appid;
+        let link = "scraperAchievements.php?username=" + username + '&gameId=' + gameId;
+
+        $.get(link, null, function (data) {
+            try {
+                $('#achievementsContainer_' + idHtml).html(data);
+            } catch (e) {
+                
+            }                            
+        });
+
+    })
+}
+
+
+
+
+
+
+
+// var requisicoesSimultaneas = ' . $requisicoesSimultaneas . ';
+// var indexBoletosGerar = -1;
+
+// function iteraListaBoletosGerar(indexBoleto) {
+
+// 	$("#lista-boletos-gerar li").each(function(index) {
+// 		if (index == indexBoleto) {
+// 			var element = $(this);
+// 			var idCobranca = element.find(".idCobranca").text();
+
+// 			gerarBoleto(element, idCobranca);
+// 		}
+// 	});
+// }
+
+// for (var i = 0; i < requisicoesSimultaneas; i++) {
+// 	iteraListaBoletosGerar(++indexBoletosGerar);
+// }
+
+// function gerarBoleto(element, idCobranca) {
+
+// 	element.find(".icon-error").css("display", "none");
+// 	element.find(".loading").css("display", "inline-block");
+
+// 	$.post("index.php?r=cobranca/gerarTransacaoGerencianet", {idCobranca: idCobranca}, function(res) {
+
+// 		element.find(".loading").css("display", "none");
+
+// 		var resultado = JSON.parse(res);
+
+// 		if (resultado.status) {
+// 			element.find(".icon-success").css("display", "inline-block");
+// 		}
+// 		else {
+// 			element.find(".icon-error").css("display", "inline-block");
+// 			element.find(".icon-error").parent().attr("data-original-title", resultado.mensagem + "<br>Clique para tentar novamente.");
+// 			var botaoReenviar = $("#gerar-todos");
+// 			if (botaoReenviar.css("display") == "none") {
+// 				botaoReenviar.css("display", "block");
+// 			}
+// 		}
+// 	}).fail(function() {
+
+// 		element.find(".loading").css("display", "none");
+// 		element.find(".icon-error").css("display", "inline-block");
+// 		element.find(".icon-error").parent().attr("data-original-title", "Ocorreu um erro ao tentar gerar o boleto Gerencianet.<br>Clique para tentar novamente.");
+// 		var botaoReenviar = $("#gerar-todos");
+
+// 		if (botaoReenviar.css("display") == "none") {
+// 			botaoReenviar.css("display", "block");
+// 		}
+
+// 	}).always(function() {
+
+// 		if (indexBoletosGerar < $("#lista-boletos-gerar li").length - 1) {
+// 			iteraListaBoletosGerar(++indexBoletosGerar);
+// 		}
+
+// 	});
+// }
