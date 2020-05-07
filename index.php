@@ -6,6 +6,7 @@ header("Access-Control-Allow-Origin: *");
 <html lang="pt-br">
 
 <head>
+    <script data-ad-client="ca-pub-6626201634625844" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<link rel="shortcut icon" href="favicon.ico">
