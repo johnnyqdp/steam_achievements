@@ -1,51 +1,39 @@
-var musicaLigada = true;
-
-var username = "";
-var tenises = 0;
-var a = 0;
-var b = 0;
-var c = 0;
-var d = 0;
-var e = 0;
-
-var variacaoTenis = 1;
+var games;
+var username;
 
 $(document).ready(function() {
 
     bootbox.dialog({
         message: $("#textoModalLogin").html(),
         closeButton: false,
-        title: "Bem-vindo ao Freire Clicker!",
+        title: "Bem-vindo ao SteamAchievements!",
         headerCloseButton: null, 
         backdrop: "static",
         keyboard: false,
         buttons:{
             ok:{
                 label: 'Prosseguir',
-                className: 'btn btn-outline-danger',
-                callback: function(){
-                    if (!username){
+                className: 'btn btn-outline-primary botaoProsseguir',
+                callback: function () {
+                    if (username) {
+                        adicionarIconeLoading();                
+                        $.get("scraper.php?username=" + username, null, function (data) {
+                            try {
+                                games = JSON.parse(data);
+                                percorrerJogos(games);
+                                bootbox.hideAll()
+                                return true;
+                            } catch (e) {
+                                mensagemErro();
+                                removerIconeLoading();
+                            }                            
+                        }).fail(function () {
+                            mensagemErro();
+                            removerIconeLoading();
+                        });
                         return false;
                     } else {
-                        $.get("https://freire-clicker-api.herokuapp.com/index.php?nome="+username, null, (data)=>{
-                            if (data){
-                                tenises = parseInt(data.pontos);
-                                $("#quantTenis").html(data.pontos);
-                                a = parseInt(data.a);
-                                b = parseInt(data.b);
-                                c = parseInt(data.c);
-                                d = parseInt(data.d);
-                                e = parseInt(data.e);
-                            }
-                            $("#ost")[0].loop = true;
-                            $("#ost")[0].volume = 0.04;
-                            $("#ost")[0].play();
-                            document.addEventListener('keydown', e => {
-                                if (e.repeat) return;
-                                if (e.key == " ") farmar();
-                            })
-                            save();
-                        },"json");
+                        return false;
                     }
                 }
             },
@@ -53,74 +41,44 @@ $(document).ready(function() {
     })
 });
 
-$("#musicaSwitch").click(()=> {
-    let classe = musicaLigada ? 'fa fa-volume-off fa-2x' : 'fa fa-volume-up fa-2x';
-    $("#ost")[0].volume = musicaLigada ? 0 : 0.04;
-    musicaLigada = !musicaLigada;
-    $("#musicaSwitch")[0].className = classe;
-});
+function mensagemErro() {
+    toastr.error("Ocorreu um erro inesperado. Verifique se o nick inserido está correto. Se o nick estiver correto, me avisa pra eu corrigir o bug!", "Erro");
+}
+
+function adicionarIconeLoading () {
+    removerIconeLoading();
+    $(".botaoProsseguir").append('<i style="margin-left:10px" class="fa fa-spin fa-spinner"></i>');
+}
+
+function removerIconeLoading () {
+    $(".botaoProsseguir").find('.fa-spin').remove();
+}
 
 function changeName (name) {
     username = name;
 }
 
-function farmar () {  
-    tenises += variacaoTenis;
-    $("#quantTenis").html(tenises);
-}
+function percorrerJogos (games) {
+    $('#box').html('');
+    games.forEach(function (data, i) {
+        let html = `<div class="joguinho" id="game_` + data.appid + `">
+                        <div style="display: flex">
+                            <div class="logo">
+                                <img src="` + data.logo + `">
+                            </div>
 
-function comprar () {
-    bootbox.dialog({
-        message:$("#textoModalMercado").html(),
-    })
-}
+                            <div class="negocinhos">               
+                                <h4 class="texto" style="margin-bottom:-20px">` + data.name + `</h4>
+                                <br>
+                                <span class="texto">` + data.hours_forever + ` horas de jogo</span>
+                            </div>
+                        </div>
 
-function save () {
-    setTimeout(()=> {
-        $.post("https://freire-clicker-api.herokuapp.com", 
-            {
-                "nome": username, 
-                "pontos": tenises,
-                "a":a,
-                "b":b,
-                "c":c,
-                "d":d,
-                "e":e                
-            }
-        , ()=>{
-            toastr.info("Seus tênises foram salvos no servidor com sucesso!", "Jogo salvo automaticamente");
-            save();
-        },"json");
-    }, 20000);
-}
+                        <div class="achievementsContainer">
+                            <i class="fa fa-spin fa-4x fa-spinner texto" style="margin-right: 40px"></i>
+                        </div>
 
-function verRanking(){
-    let htmlRank = `    
-    <div style="height:500px;overflow-y: auto">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th class="text-center" scope="col">Posição</th>
-                    <th class="text-center" scope="col">Jogador</th>
-                    <th class="text-center" scope="col" style="width:25%">Quantidade de Tênises</th>
-                </tr>
-            </thead>
-            <tbody>`;
-
-    $.get("https://freire-clicker-api.herokuapp.com", null, (data) => {
-
-        Object.keys(data).forEach((value, i) => {
-            let posicao = i+1;
-            htmlRank+='<tr>';
-            htmlRank+='<td class="text-center">'+ posicao +'º</td>';
-            htmlRank+='<td class="text-center">'+ value +'</td>';
-            htmlRank+='<td class="text-center">'+ data[value].pontos +'</td>';
-            htmlRank+="</tr>";
-        });
-        htmlRank+=`</tbody></table></div>`;
-        bootbox.dialog({
-            message: htmlRank,
-            title: "Ranking",
-        })
-    },"json")
+                    </div>`
+        $('#box').append(html);
+    });
 }

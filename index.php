@@ -1,3 +1,7 @@
+<?php 
+header("Access-Control-Allow-Origin: *");
+?>
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -33,43 +37,42 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Freire Clicker</title>
+    <title>Steam Achievements</title>
 </head>
 
-<body>
-    <i class="fa fa-volume-up fa-2x" id="musicaSwitch" style="margin-left:10px; margin-top:10px"></i>
-
-    <audio controls id="ost" volume=0.1 style="display:none">
-        <source src="ost.ogg" type="audio/ogg">
-    </audio>
-     
+<body>     
     <div class="content">
-        <div class="box">
-            <div class="buyButton">
-                <button type="button" class="btn btn-success" onclick="comprar()"><i class="fa fa-shopping-cart fa-3x" aria-hidden="true"></i></button>
+        <div class="box" id="box">
+
+            <div class="joguinho" id="game_304240">
+                <div style="display: flex">
+                    <div class="logo">
+                        <img src="https://steamcdn-a.akamaihd.net/steam/apps/304240/capsule_184x69.jpg" id="delayedimage_game_logo_304240_0">
+                    </div>
+
+                    <div class="negocinhos">               
+                        <h4 class="texto" style="margin-bottom:-20px">Resident Evil / biohazard HD REMASTER</h4>
+                        <br>
+                        <span class="texto">172 horas registradas</span>
+                    </div>
+                </div>
+
+                <div class="achievementsContainer">
+                    <i class="fa fa-spin fa-4x fa-spinner texto" style="margin-right: 40px"></i>
+                </div>
+
             </div>
-            <div class="topMenu">
-                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" style="margin-right:15px" title="Ranking" onclick="verRanking()"><i class="fa fa-list-ol fa-lg" aria-hidden="true"></i></button>
-                <button type="button" class="btn btn-secondary" title="Jogar Multiplayer" data-toggle="tooltip" data-placement="top"><i class="fa fa-globe fa-lg" aria-hidden="true" ></i></button>
-            </div>
-            
-            <div class="center">
-                <img src="imagens/freire.png"></img>
-                <div style="font-size:30px; margin-top:10px; margin-bottom:10px">Você tem <span id="quantTenis">0</span> tenises</div>
-                <div id="farmButton" class="center" title="Você também pode farmar apertando espaço." onclick="farmar()">FARMAR</div>
-            </div>
-        </div>
+
+        </div>   
+        <span style="margin-top:20px; text-align:center" class="texto">Criado por <a target="_blank" href="https://www.facebook.com/johnnyqdp">Johnny Quest</a><br><span style="font-size: 10px;">Se tiver bugado me avisa lá no facebook ;)</span></span>   
     </div>
+    
 
     <div id="textoModalLogin" style="display:none">
-        <label for="nickname">Por favor, insira o seu nome:</label>
-        <input type="text" class="form-control" id="nicknameFormInput" aria-describedby="nickname" placeholder="XxAmoTenisxX" maxlength="15" onchange="changeName(this.value)">
-        <small class="form-text text-muted">Este nome será exibido no ranking.</small>
+        <label for="nickname">Nick do usuário steam:</label>
+        <input type="text" class="form-control" id="nicknameFormInput" aria-describedby="nickname" placeholder="XxNegaoDoZapxX" maxlength="50" onchange="changeName(this.value)">
+        <small class="form-text text-muted">Este deve ser o nick que aparece na url da steam ao abrir o perfil. Por exemplo: steamcommunity.com/id/<b>coffeepills</b></small>
     </div>
-
-    <div id="textoModalMercado" style="display:none">
-        <br><br><br><br><br><br><br><br><br><br><br><br><br>asdasdassd
-    </div>    
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

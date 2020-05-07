@@ -6,6 +6,13 @@
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #171a21;
+    flex-direction: column;
 }
 
 hr {
@@ -24,11 +31,12 @@ hr {
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
-    background-image: linear-gradient(white, #d9d9d9);
+    background-image: linear-gradient(#1a1a1a, #000d1a);
     border-radius: 20px;
-    height: 461px;
-    width: 500px;
+    height: 90%;
+    width: 90%;
     box-shadow: 2px 2px 15px black;
+    overflow-y: scroll;
 }
 
 #logo {
@@ -68,24 +76,21 @@ hr {
     }
 }
 
-body {
-    background: url('imagens/background.jpg');
-    background-size: 100%;
+.joguinho {
+    min-height: 69px;
+    height: auto;
+    margin-bottom: 4px;
+    background: rgba( 0, 0, 0, 0.2 );
+    padding: 8px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
 }
 
-.topMenu {
-    padding:10px;
-    display:flex;
-    margin-bottom:-50px;
+.texto{
+    color: white;
 }
 
-.buyButton {
-    padding:10px;
-    float:right;
-    margin-bottom:-100px;
-}
-
-#textoModalMercado {
-    min-height:600px;
-    background-color:red;
+.negocinhos {
+    margin-left: 15px;
 }
