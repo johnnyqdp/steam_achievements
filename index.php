@@ -46,7 +46,12 @@ header("Access-Control-Allow-Origin: *");
 
 <body>     
     <div class="content">
-        <h2 class="texto" style="margin-bottom:20px">Estatísticas de <span id="nomeUsuario"><i class="fa fa-spin fa-spinner texto"></i></span></h2>
+        <span id="loading" style="margin-bottom: 2px; color: #868686; font-family: monospace; font-size: 10px; float:right; align-self: flex-start; display: none;">
+            <i class="fa fa-spin fa-spinner" style="margin-right:10px"></i>(<span id="quantJogosCheckados">0</span>/<span id="quantJogosTotal">0</span>) <span id="jogoAtual">...</span>
+        </span>
+
+        <h2 style="margin-bottom:20px" class="texto">Estatísticas de <span id="nomeUsuario"><i class="fa fa-spin fa-spinner texto"></i></span></h2>
+       
         <div class="box" id="box">
         
             <div class="joguinho" id="game_304240">
@@ -155,7 +160,7 @@ header("Access-Control-Allow-Origin: *");
             </div>
 
         </div>   
-        <span style="margin-top:20px; text-align:center" class="texto">Criado por <a target="_blank" href="https://www.facebook.com/johnnyqdp">Johnny Quest</a><br><span style="font-size: 10px;">Se tiver bugado me avisa lá no facebook ;)</span></span>   
+        <span style="margin-top:20px; text-align:center" class="texto">Criado por <a style="color:#68b0fd" target="_blank" href="https://www.facebook.com/johnnyqdp">Johnny Quest</a><br><span style="font-size: 10px;">Se tiver bugado me avisa lá no facebook ;)</span></span>   
     </div>
     
 

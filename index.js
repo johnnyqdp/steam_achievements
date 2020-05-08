@@ -2,6 +2,8 @@ var games;
 var username;
 var url;
 
+var quantGamesCheckados = 0;
+
 $(document).ready(function() {
 
     setTimeout(function(){
@@ -31,6 +33,7 @@ $(document).ready(function() {
                         $.get(url, null, function (data) {
                             try {
                                 games = JSON.parse(data);
+                                $("#quantJogosTotal").html(games.length);
                                 percorrerJogos(games);
                                 bootbox.hideAll()
                                 return true;
@@ -122,21 +125,28 @@ function adicionaNome() {
 }
 
 function pegarAchievements() {
-
+    $("#loading").fadeIn(300);
     games.forEach( function (data, i) {
         let gameId = data.friendlyURL;
         let idHtml = data.appid;
-        let link = "scraperAchievements.php?username=" + username + '&gameId=' + gameId;
+        let link = "scraperAchievements.php?username=" + username + '&gameId=' + gameId;  
+        let gameName = data.name;      
 
         $.get(link, null, function (data) {
             try {
                 $('#achievementsContainer_' + idHtml).html(data);
+                $("#jogoAtual").html(gameName);
+                quantGamesCheckados++;
+                $("#quantJogosCheckados").html(quantGamesCheckados);
+                if (quantGamesCheckados == games.length)
+                    $("#loading").fadeOut();
             } catch (e) {
                 
             }                            
-        });        
+        });      
 
     })
+    
 }
 
 
