@@ -100,6 +100,28 @@ hr {
     align-items: center;
 }
 
+.joguinhomobile {
+    min-height: 69px;
+    height: auto;
+    margin-bottom: 4px;
+    background: rgba( 0, 0, 0, 0.2 );
+    padding: 8px;
+    overflow: hidden;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.joguinho2mobile {
+    min-height: 69px;
+    height: auto;
+    margin-bottom: 4px;
+    background: rgba(54, 54, 54, 0.2);
+    padding: 8px;
+    overflow: hidden;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .texto{
     color: white;
 }
@@ -122,4 +144,8 @@ hr {
 .topSummaryAchievements {
     min-width: 322px;
     width: 322px;
+}
+
+.topSummaryAchievementsmobile {
+    width: 100%;
 }

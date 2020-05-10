@@ -1,10 +1,15 @@
 var games;
 var username;
 var url;
+var isMobile = false;
 
 var quantGamesCheckados = 0;
 
 $(document).ready(function() {
+
+    if (screen.width <= 830) {
+        isMobile = true;
+    }
 
     setTimeout(function(){
         document.addEventListener("keyup", function(event) {
@@ -14,7 +19,6 @@ $(document).ready(function() {
         });
     }, 2000);
     
-
     bootbox.dialog({
         message: $("#textoModalLogin").html(),
         closeButton: false,
@@ -36,6 +40,22 @@ $(document).ready(function() {
                                 $("#quantJogosTotal").html(games.length);
                                 percorrerJogos(games);
                                 bootbox.hideAll()
+
+                                if (isMobile) {
+                                    setTimeout(function(){
+                                        bootbox.dialog({
+                                            closeButton: null, 
+                                            message: '<b>DICA:</b> Você pode ver todas as conquistas de um jogo clicando nele.',
+                                            buttons:{
+                                                ok:{
+                                                    label: 'Entendi',
+                                                    className: 'btn btn-outline-secondary'
+                                                },
+                                            }
+                                        })
+                                    }, 4000);
+                                }
+
                                 return true;
                             } catch (e) {
                                 mensagemErro();
@@ -86,24 +106,8 @@ function percorrerJogos (games) {
         if ((i % 2) == 1) {
             nomeClasse += "2";
         }
-        let html = `<div class="` + nomeClasse + `" id="game_` + data.appid + `">
-                        <div style="display: flex">
-                            <div class="logo">
-                                <img src="` + data.logo + `">
-                            </div>
-
-                            <div class="negocinhos">               
-                                <h4 class="texto" style="margin-bottom:-20px">` + data.name + `</h4>
-                                <br>
-                                <span class="texto">` + horas + ` horas de jogo</span>
-                            </div>
-                        </div>
-
-                        <div class="achievementsContainer" id="achievementsContainer_` + data.appid + `">
-                            <i class="fa fa-spin fa-4x fa-spinner texto" style="margin-right: 40px"></i>
-                        </div>
-
-                    </div>`
+        let html = getHtmlJogo(nomeClasse, data.appid, data.logo, data.name, horas);
+        
         $('#box').append(html);
     });
 
@@ -129,7 +133,7 @@ function pegarAchievements() {
     games.forEach( function (data, i) {
         let gameId = data.friendlyURL;
         let idHtml = data.appid;
-        let link = "scraperAchievements.php?username=" + username + '&gameId=' + gameId;  
+        let link = "scraperAchievements.php?username=" + username + '&gameId=' + gameId + '&isMobile=' + isMobile;  
         let gameName = data.name;      
 
         $.get(link, null, function (data) {
@@ -149,69 +153,36 @@ function pegarAchievements() {
     
 }
 
+function getHtmlJogo (nomeClasse, appid, logo, name, horas) {
+    let displayFlex = "style='display:flex;'";
+    let classNegocinhos = "class='negocinhos'";
+    let styleLogo = '';
+    if (isMobile) {
+        nomeClasse += "mobile";
+        classNegocinhos = '';
+        displayFlex = '';
+        styleLogo = 'style="display: flex;justify-content: center;"'
+    }
+
+    return `<div class="` + nomeClasse + `" id="game_` + appid + `">
+                <div `+ displayFlex + `>
+                    <div class="logo" ` + styleLogo + `>
+                        <img src="` + logo + `">
+                    </div>
+
+                    <div ` + classNegocinhos + `>               
+                        <h4 class="texto" style="margin-bottom:-20px">` + name + `</h4>
+                        <br>
+                        <span class="texto">` + horas + ` horas de jogo</span>
+                    </div>
+                </div>
+
+                <div class="achievementsContainer" id="achievementsContainer_` + appid + `">
+                    <i class="fa fa-spin fa-4x fa-spinner texto" style="margin-right: 40px"></i>
+                </div>
+
+            </div>`
+}
 
 
 
-
-
-
-// var requisicoesSimultaneas = ' . $requisicoesSimultaneas . ';
-// var indexBoletosGerar = -1;
-
-// function iteraListaBoletosGerar(indexBoleto) {
-
-// 	$("#lista-boletos-gerar li").each(function(index) {
-// 		if (index == indexBoleto) {
-// 			var element = $(this);
-// 			var idCobranca = element.find(".idCobranca").text();
-
-// 			gerarBoleto(element, idCobranca);
-// 		}
-// 	});
-// }
-
-// for (var i = 0; i < requisicoesSimultaneas; i++) {
-// 	iteraListaBoletosGerar(++indexBoletosGerar);
-// }
-
-// function gerarBoleto(element, idCobranca) {
-
-// 	element.find(".icon-error").css("display", "none");
-// 	element.find(".loading").css("display", "inline-block");
-
-// 	$.post("index.php?r=cobranca/gerarTransacaoGerencianet", {idCobranca: idCobranca}, function(res) {
-
-// 		element.find(".loading").css("display", "none");
-
-// 		var resultado = JSON.parse(res);
-
-// 		if (resultado.status) {
-// 			element.find(".icon-success").css("display", "inline-block");
-// 		}
-// 		else {
-// 			element.find(".icon-error").css("display", "inline-block");
-// 			element.find(".icon-error").parent().attr("data-original-title", resultado.mensagem + "<br>Clique para tentar novamente.");
-// 			var botaoReenviar = $("#gerar-todos");
-// 			if (botaoReenviar.css("display") == "none") {
-// 				botaoReenviar.css("display", "block");
-// 			}
-// 		}
-// 	}).fail(function() {
-
-// 		element.find(".loading").css("display", "none");
-// 		element.find(".icon-error").css("display", "inline-block");
-// 		element.find(".icon-error").parent().attr("data-original-title", "Ocorreu um erro ao tentar gerar o boleto Gerencianet.<br>Clique para tentar novamente.");
-// 		var botaoReenviar = $("#gerar-todos");
-
-// 		if (botaoReenviar.css("display") == "none") {
-// 			botaoReenviar.css("display", "block");
-// 		}
-
-// 	}).always(function() {
-
-// 		if (indexBoletosGerar < $("#lista-boletos-gerar li").length - 1) {
-// 			iteraListaBoletosGerar(++indexBoletosGerar);
-// 		}
-
-// 	});
-// }

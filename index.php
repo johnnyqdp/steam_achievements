@@ -6,7 +6,6 @@ header("Access-Control-Allow-Origin: *");
 <html lang="pt-br">
 
 <head>
-    <script data-ad-client="ca-pub-6626201634625844" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<link rel="shortcut icon" href="favicon.ico">
@@ -45,12 +44,12 @@ header("Access-Control-Allow-Origin: *");
 </head>
 
 <body>     
-    <div class="content">
+    <div class="content" id="content">
         <span id="loading" style="margin-bottom: 2px; color: #868686; font-family: monospace; font-size: 10px; float:right; align-self: flex-start; display: none;">
             <i class="fa fa-spin fa-spinner" style="margin-right:10px"></i>(<span id="quantJogosCheckados">0</span>/<span id="quantJogosTotal">0</span>) <span id="jogoAtual">...</span>
         </span>
 
-        <h2 style="margin-bottom:20px" class="texto">Estatísticas de <span id="nomeUsuario"><i class="fa fa-spin fa-spinner texto"></i></span></h2>
+        <h2 style="margin-bottom:20px; text-align:center" class="texto">Estatísticas de <span id="nomeUsuario"><i class="fa fa-spin fa-spinner texto"></i></span></h2>
        
         <div class="box" id="box">
         

@@ -64,8 +64,15 @@ if ($porcentagem == "100") {
     $color = "#ff6666";
 }
 
-$retorno = '<div class="topSummaryAchievements" id="topSummaryAchievements" style="margin-right:10px">
-                <div style="color:'.$color.'"> '.$conquistasPegas.' de '.$conquistasTotais.' ('.$porcentagem.'%) conquistas alcançadas </div>
+$styleFontSize = "";
+$classTopSummary = "topSummaryAchievements";
+if ($_GET['isMobile'] == "true") {
+    $classTopSummary .= 'mobile';
+    $styleFontSize = "font-size:12px";
+}
+
+$retorno = '<div class="'.$classTopSummary.'" id="topSummaryAchievements" style="margin-right:10px">
+                <div style="color:'.$color.';'.$styleFontSize.'"> '.$conquistasPegas.' de '.$conquistasTotais.' ('.$porcentagem.'%) conquistas alcançadas </div>
                 <div class="achieveBar">
                     <div class="achieveBarProgress" style="width: '.$porcentagem.'%; background-color: '.$color.';">
                 </div>
