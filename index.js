@@ -2,6 +2,7 @@ var games;
 var username;
 var url;
 var isMobile = false;
+var jaClicou = false;
 
 var quantGamesCheckados = 0;
 
@@ -31,7 +32,9 @@ $(document).ready(function() {
                 label: 'Prosseguir',
                 className: 'btn btn-outline-primary botaoProsseguir',
                 callback: function() {
-                    if (username) {
+                    if (username && !jaClicou) {
+                        $(document.activeElement).filter(':input:focus').blur();
+                        jaClicou = true;
                         adicionarIconeLoading(); 
                         url = "scraper.php?username=" + username;
                         $.get(url, null, function (data) {
