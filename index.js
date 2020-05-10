@@ -19,63 +19,10 @@ $(document).ready(function() {
             }
         });
     }, 2000);
+
+    selecionarUsuario();
     
-    bootbox.dialog({
-        message: $("#textoModalLogin").html(),
-        closeButton: false,
-        title: "Bem-vindo ao SteamAchievements!",
-        headerCloseButton: null, 
-        backdrop: "static",
-        //keyboard: false,
-        buttons:{
-            ok:{
-                label: 'Prosseguir',
-                className: 'btn btn-outline-primary botaoProsseguir',
-                callback: function() {
-                    if (username && !jaClicou) {
-                        $(document.activeElement).filter(':input:focus').blur();
-                        jaClicou = true;
-                        adicionarIconeLoading(); 
-                        url = "scraper.php?username=" + username;
-                        $.get(url, null, function (data) {
-                            try {
-                                games = JSON.parse(data);
-                                $("#quantJogosTotal").html(games.length);
-                                percorrerJogos(games);
-                                bootbox.hideAll()
-
-                                if (isMobile) {
-                                    setTimeout(function(){
-                                        bootbox.dialog({
-                                            closeButton: null, 
-                                            message: '<b>DICA:</b> Você pode ver todas as conquistas de um jogo clicando nele.',
-                                            buttons:{
-                                                ok:{
-                                                    label: 'Entendi',
-                                                    className: 'btn btn-outline-secondary'
-                                                },
-                                            }
-                                        })
-                                    }, 4000);
-                                }
-
-                                return true;
-                            } catch (e) {
-                                mensagemErro();
-                                removerIconeLoading();
-                            }                            
-                        }).fail(function () {
-                            mensagemErro();
-                            removerIconeLoading();
-                        });
-                        return false;
-                    } else {
-                        return false;
-                    }
-                },
-            },
-        }
-    })
+    
 });
 
 function mensagemErro() {
@@ -124,7 +71,7 @@ function adicionaNome() {
     let a = "scraperNome.php?username=" + username;
     $.get(a, null, function (data) {
         try {
-            $("#nomeUsuario").html(data);
+            $("#nomeUsuario").html(data + '<i class="fa fa-pencil"></i>');
         } catch (e) {
             
         }                            
@@ -171,7 +118,7 @@ function getHtmlJogo (nomeClasse, appid, logo, name, horas) {
         imageStyle = 'style="height:60px"';
     }
 
-    return `<div class="` + nomeClasse + `" id="game_` + appid + `">
+    return `<div title="Ver conquistas adquiridas em `+name+`" class="` + nomeClasse + `" id="game_` + appid + `">
                 <div `+ displayFlex + `>
                     <div class="logo" ` + styleLogo + `>
                         <img `+imageStyle+` src="` + logo + `">
@@ -189,6 +136,71 @@ function getHtmlJogo (nomeClasse, appid, logo, name, horas) {
                 </div>
 
             </div>`
+}
+
+$('#nomeUsuario').click(function(){
+    location.reload();
+});
+
+function selecionarUsuario() {
+    bootbox.dialog({
+        message: $("#textoModalLogin").html(),
+        closeButton: false,
+        title: "Bem-vindo ao SteamAchievements!",
+        headerCloseButton: null, 
+        backdrop: "static",
+        centerVertical: true,
+        //keyboard: false,
+        buttons:{
+            ok:{
+                label: 'Prosseguir',
+                className: 'btn btn-outline-primary botaoProsseguir',
+                callback: function() {
+                    if (username && !jaClicou) {
+                        $(document.activeElement).filter(':input:focus').blur();
+                        jaClicou = true;
+                        adicionarIconeLoading(); 
+                        url = "scraper.php?username=" + username;
+                        $.get(url, null, function (data) {
+                            try {
+                                games = JSON.parse(data);
+                                $("#quantJogosTotal").html(games.length);
+                                percorrerJogos(games);
+                                bootbox.hideAll()
+
+                                if (isMobile) {
+                                    setTimeout(function(){
+                                        bootbox.dialog({
+                                            closeButton: null, 
+                                            centerVertical: true,
+                                            message: '<b>DICA:</b> Você pode ver as conquistas adquiridas clicando no jogo.',
+                                            buttons:{
+                                                ok:{
+                                                    label: 'Entendi',
+                                                    className: 'btn btn-outline-secondary'
+                                                },
+                                            }
+                                        })
+                                    }, 4000);
+                                }
+
+                                return true;
+                            } catch (e) {
+                                mensagemErro();
+                                removerIconeLoading();
+                            }                            
+                        }).fail(function () {
+                            mensagemErro();
+                            removerIconeLoading();
+                        });
+                        return false;
+                    } else {
+                        return false;
+                    }
+                },
+            },
+        }
+    })
 }
 
 

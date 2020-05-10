@@ -49,7 +49,7 @@ header("Access-Control-Allow-Origin: *");
             <i class="fa fa-spin fa-spinner" style="margin-right:10px"></i>(<span id="quantJogosCheckados">0</span>/<span id="quantJogosTotal">0</span>) <span id="jogoAtual">...</span>
         </span>
 
-        <h2 style="margin-bottom:20px; text-align:center" class="texto">Estatísticas de <span id="nomeUsuario"><i class="fa fa-spin fa-spinner texto"></i></span></h2>
+        <h2 style="margin-bottom:20px; text-align:center" class="texto">Estatísticas de <span title="Inserir outro usuário" style="border-bottom:dotted" id="nomeUsuario" class="nomeUsuario"><i class="fa fa-spin fa-spinner texto"></i></span></h2>
        
         <div class="box" id="box">
         

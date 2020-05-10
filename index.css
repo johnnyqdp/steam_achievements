@@ -149,3 +149,20 @@ hr {
 .topSummaryAchievementsmobile {
     width: 100%;
 }
+
+.texto span.nomeUsuario:hover {
+    cursor: pointer;
+    color: blue;
+}
+
+.joguinho:hover {
+    cursor: pointer;
+    background: rgb(62,62,62);
+    background: linear-gradient(0deg, rgba(62,62,62,1) 0%, rgba(31,31,31,1) 100%);
+}
+
+.joguinho2:hover {
+    cursor: pointer;
+    background: rgb(62,62,62);
+    background: linear-gradient(0deg, rgba(62,62,62,1) 0%, rgba(31,31,31,1) 100%);
+}
