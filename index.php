@@ -29,9 +29,9 @@ header("Access-Control-Allow-Origin: *");
 	<meta name="msapplication-TileImage" content="favicon-144.png">
     <meta name="msapplication-config" content="browserconfig.xml">
 
-    <link rel="stylesheet" type="text/css" href="./index.css"></link>
+    <link rel="stylesheet" type="text/css" href="./index.css?rnd=132"></link>
 
-    <link rel="stylesheet" type="text/css" href="./loading-bar.css"/>
+    <link rel="stylesheet" type="text/css" href="./loading-bar.css?rnd=132"/>
     
     
     <meta charset="utf-8">
@@ -182,6 +182,6 @@ header("Access-Control-Allow-Origin: *");
 </body>
 
 </html>
-<link type="text/css" href="./toastr.css" rel="stylesheet"></link>
+<link type="text/css" href="./toastr.css?rnd=132" rel="stylesheet"></link>
 <script src="toastr.js"></script>
 <script type="text/javascript" src="index.js"></script>
