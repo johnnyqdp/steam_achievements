@@ -29,7 +29,7 @@ header("Access-Control-Allow-Origin: *");
 	<meta name="msapplication-TileImage" content="favicon-144.png">
     <meta name="msapplication-config" content="browserconfig.xml">
 
-    <link rel="stylesheet" type="text/css" href="./index.css?rnd=132"></link>
+    <link rel="stylesheet" type="text/css" href="./index.css?rnd=1372"></link>
 
     <link rel="stylesheet" type="text/css" href="./loading-bar.css?rnd=132"/>
     

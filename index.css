@@ -169,7 +169,7 @@ hr {
 
 
 
-.botaoAnimadinho:active {
+.botaoAnimadinho:hover, .botaoAnimadinho:focus, .botaoAnimadinho:active {
     background: grey;
 }
 
