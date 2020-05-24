@@ -3,6 +3,7 @@ var username;
 var url;
 var isMobile = false;
 var jaClicou = false;
+var pausouRequisicao = false;
 
 var quantGamesCheckados = 0;
 
@@ -79,7 +80,8 @@ function adicionaNome() {
 }
 
 function pegarAchievements() {
-    $("#loading").fadeIn(300);
+    if (!isMobile)
+        $("#loading").fadeIn(300);
     games.forEach( function (data, i) {
         let gameId = data.friendlyURL;
         let idHtml = data.appid;
@@ -88,16 +90,20 @@ function pegarAchievements() {
 
         $.get(link, null, function (data) {
             try {
-                $('#achievementsContainer_' + idHtml).html(data);
+                $('#achievementsContainer_' + idHtml).html(data.achievements);
                 $("#jogoAtual").html(gameName);
                 quantGamesCheckados++;
                 $("#quantJogosCheckados").html(quantGamesCheckados);
+
+                //colocando o detalhamento:
+                games[i].detalhamento = data.detalhamento;
+
                 if (quantGamesCheckados == games.length)
                     $("#loading").fadeOut();
             } catch (e) {
                 
             }                            
-        });      
+        }, "json");      
 
     })
     
@@ -118,7 +124,7 @@ function getHtmlJogo (nomeClasse, appid, logo, name, horas) {
         imageStyle = 'style="height:60px"';
     }
 
-    return `<div title="Ver conquistas adquiridas em `+name+`" class="` + nomeClasse + `" id="game_` + appid + `">
+    return `<div onclick="clicarJogo('`+appid+`')" title="Ver conquistas adquiridas em `+name+`" class="` + nomeClasse + ` botaoAnimadinho" id="game_` + appid + `">
                 <div `+ displayFlex + `>
                     <div class="logo" ` + styleLogo + `>
                         <img `+imageStyle+` src="` + logo + `">
@@ -190,17 +196,36 @@ function selecionarUsuario() {
                                 removerIconeLoading();
                             }                            
                         }).fail(function () {
+                            jaClicou = false;
                             mensagemErro();
                             removerIconeLoading();
                         });
                         return false;
                     } else {
+                        jaClicou = false;
                         return false;
                     }
                 },
             },
         }
     })
+}
+
+function clicarJogo (appid) {
+    let index = games.findIndex(function(item){ return item.appid == appid})
+
+    $(document).on('click', '.modal-backdrop', function (event) {
+        bootbox.hideAll()
+    });
+    bootbox.dialog({
+        message: '<div id="sata" style="max-height:500px;overflow-y:scroll"><div style="display: flex; align-items:center; justify-content: center"><i class="texto fa fa-3x fa-spin fa-spinner"></i></div></div>',
+        centerVertical: true,
+        onEscape: true
+    }).find('.modal-content').css({'background-color': '#070915'});
+
+    setTimeout(function(){
+        $("#sata").html(games[index].detalhamento);
+    },1300);
 }
 
 

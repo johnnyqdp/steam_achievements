@@ -166,3 +166,13 @@ hr {
     background: rgb(62,62,62);
     background: linear-gradient(0deg, rgba(62,62,62,1) 0%, rgba(31,31,31,1) 100%);
 }
+
+
+
+.botaoAnimadinho:active {
+    background: grey;
+}
+
+.bootbox-close-button {
+    color: white !important;
+}
