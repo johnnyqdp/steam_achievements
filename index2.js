@@ -21,10 +21,19 @@ $(document).ready(function() {
         });
     }, 2000);
 
+    ajustarEstiloMobile();
     selecionarUsuario();
     
     
 });
+
+function ajustarEstiloMobile () {
+    if (isMobile) {
+        $("#content").css({'padding-left' : '0px', 'padding-right' : '0px', 'padding-top' : '0px'});
+        $("#box").css({'width' : '98%'});
+        $("#creditos").hide();
+    }
+}
 
 function mensagemErro() {
     toastr.error("Ocorreu um erro inesperado. Verifique se o nick inserido está correto. Se o nick estiver correto, me avisa pra eu corrigir o bug!", "Erro");
@@ -214,18 +223,19 @@ function selecionarUsuario() {
 function clicarJogo (appid) {
     let index = games.findIndex(function(item){ return item.appid == appid})
 
-    $(document).on('click', '.modal-backdrop', function (event) {
+    $(document).on('click', 'body', function (event) {
         bootbox.hideAll()
     });
     bootbox.dialog({
         message: '<div id="sata" style="max-height:500px;overflow-y:scroll"><div style="display: flex; align-items:center; justify-content: center"><i class="texto fa fa-3x fa-spin fa-spinner"></i></div></div>',
         centerVertical: true,
-        onEscape: true
+        onEscape: true,
+        closeButton: false,
     }).find('.modal-content').css({'background-color': '#070915'});
 
     setTimeout(function(){
         $("#sata").html(games[index].detalhamento);
-    },1300);
+    },800);
 }
 
 
