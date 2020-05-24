@@ -184,4 +184,4 @@ header("Access-Control-Allow-Origin: *");
 </html>
 <link type="text/css" href="./toastr.css?rnd=132" rel="stylesheet"></link>
 <script src="toastr.js"></script>
-<script type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="index2.js"></script>
