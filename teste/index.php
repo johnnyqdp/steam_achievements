@@ -1,6 +1,6 @@
 <?php 
 
-$id = '21690';
+$id = '304240';
 $url = "https://steamcommunity.com/id/coffeepills/stats/" . $id . "/?tab=achievements";
 
 $options = array(
@@ -21,8 +21,8 @@ $arr = explode('<div id="personalAchieve" class="achievements_list ">', $html);
 $parte1 = $arr[1];
 $parte2 = explode('<div id="footer_spacer"></div>', $parte1)[0];
 
-$todosJogos = $parte2;
-echo $todosJogos;
+//$todosJogos = $parte2;
+//echo $todosJogos;
 
 
 
@@ -40,6 +40,6 @@ $a = "a";
 $a = "a";
 $a = "a";
 $a = "a";
-//echo htmlentities($html);
+echo htmlentities($html);
 //echo $html
 ?>

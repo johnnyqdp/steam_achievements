@@ -169,7 +169,7 @@ hr {
 
 
 
-.botaoAnimadinho:hover, .botaoAnimadinho:focus, .botaoAnimadinho:active {
+.botaoAnimadinho:focus, .botaoAnimadinho:active {
     background: grey;
 }
 
@@ -195,4 +195,17 @@ hr {
 #sata::-webkit-scrollbar-thumb
 {
 	background-color: #000000;
+}
+
+.achiev {
+    cursor: pointer;
+    margin-bottom: 9px;
+}
+
+.achiev2 {
+    background-color: #0e101b;
+}
+
+.achiev1 {
+    background-color: #03061a
 }

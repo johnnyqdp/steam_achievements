@@ -81,7 +81,7 @@ function adicionaNome() {
     let a = "scraperNome.php?username=" + username;
     $.get(a, null, function (data) {
         try {
-            $("#nomeUsuario").html(data + '<i class="fa fa-pencil"></i>');
+            $("#nomeUsuario").html(data + (isMobile ? '' : '<i class="fa fa-pencil"></i>'));
         } catch (e) {
             
         }                            
@@ -97,22 +97,24 @@ function pegarAchievements() {
         let link = "scraperAchievements.php?username=" + username + '&gameId=' + gameId + '&isMobile=' + isMobile;  
         let gameName = data.name;      
 
-        $.get(link, null, function (data) {
-            try {
-                $('#achievementsContainer_' + idHtml).html(data.achievements);
-                $("#jogoAtual").html(gameName);
-                quantGamesCheckados++;
-                $("#quantJogosCheckados").html(quantGamesCheckados);
+        //if (gameId == '304240') {
+            $.get(link, null, function (data) {
+                try {
+                    $('#achievementsContainer_' + idHtml).html(data.achievements);
+                    $("#jogoAtual").html(gameName);
+                    quantGamesCheckados++;
+                    $("#quantJogosCheckados").html(quantGamesCheckados);
 
-                //colocando o detalhamento:
-                games[i].detalhamento = data.detalhamento;
+                    //colocando o detalhamento:
+                    games[i].detalhamento = data.detalhamento;
 
-                if (quantGamesCheckados == games.length)
-                    $("#loading").fadeOut();
-            } catch (e) {
-                
-            }                            
-        }, "json");      
+                    if (quantGamesCheckados == games.length)
+                        $("#loading").fadeOut();
+                } catch (e) {
+                    
+                }                            
+            }, "json"); 
+        //}     
 
     })
     

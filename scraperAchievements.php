@@ -1,8 +1,13 @@
 <?php 
 $username = $_GET['username'];
 $gameId = $_GET['gameId'];
-header("Access-Control-Allow-Origin: *");
 
+if (empty($username) && empty($gameId)){
+    $username = "coffeepills";
+    $gameId = 304240;
+} 
+
+header("Access-Control-Allow-Origin: *");
 
 $url = 'https://steamcommunity.com/id/'.$username.'/stats/'.$gameId.'/?tab=achievements';
 
@@ -111,13 +116,65 @@ $parte2 = explode('<div id="footer_spacer"></div>', $parte1)[0];
 
 $todosJogos = $parte2;
 
+$retornoFinal = '<h3 class="texto">Alcançadas</h3><hr>';
+$todosJogos = explode('<div class="achieveRow">', $todosJogos);
+
+$jaChegouNosPendentes = false;
+
+
+foreach ($todosJogos as $key => $jogo) {
+    if (strpos($jogo, '<!--<h1 class="achieveHeader">') !== false) {
+        continue;
+    }
+
+    //vendo se é pra colocar o titulo de pendentes:
+    if (strpos($jogo, '<div class="achieveUnlockTime">') === false && !$jaChegouNosPendentes && strpos($jogo, '<!--<h1 class="achieveHeader">') === false) {
+        $jaChegouNosPendentes = true;
+        $retornoFinal .= '<h3 style="margin-top:15px" class="texto">Pendentes</h3><hr>';
+    }
+
+    //pegando link da imagem:
+    $parte1 = explode('<img src="', $jogo)[1];
+    $imagem = explode('">', $parte1)[0];
+
+    //pegando titulo do achievement
+    $parte1 = explode('<h3 class="ellipsis">', $jogo)[1];
+    $titulo = explode('</h3>', $parte1)[0];
+
+    //pegando subtitulo do achievement
+    $parte1 = explode('<h5>', $jogo)[1];
+    $subtitulo = explode('</h5>', $parte1)[0];
+
+    //pegando data de alcance caso tenha
+    $data = '';
+    if (!$jaChegouNosPendentes) {
+        $parte1 = explode('<div class="achieveUnlockTime">', $jogo)[1];
+        $data = trim(explode('<br/>', $parte1)[0]);
+    }
+
+    //pegando a classe:
+    $classe = $key % 2 == 0 ? 'achiev1' : 'achiev2';
+
+    //MONTANDO O JOGO PRA BOTAR NO HTML:
+    $retornoFinal .= '
+    <div class="achiev '.$classe.'" title="'.$data.'" style="display: flex">
+        <div >
+            <img style="height:44px" src="'.$imagem.'">
+        </div>
+        
+        <div style="margin-left: 3px" class="texto">
+            <b>'.$titulo.'</b><div style="font-size:11px">'.$subtitulo.'</div>
+        </div>
+        
+    </div>';
+}
 
 /** ****************** */
 
 
 $array = array(
     'achievements' => $retorno,
-    'detalhamento' => $todosJogos
+    'detalhamento' => $retornoFinal
 );
 
 echo json_encode($array);

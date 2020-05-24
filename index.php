@@ -29,7 +29,7 @@ header("Access-Control-Allow-Origin: *");
 	<meta name="msapplication-TileImage" content="favicon-144.png">
     <meta name="msapplication-config" content="browserconfig.xml">
 
-    <link rel="stylesheet" type="text/css" href="./index.css?rnd=1372"></link>
+    <link rel="stylesheet" type="text/css" href="./index.css?rnd=13782"></link>
 
     <link rel="stylesheet" type="text/css" href="./loading-bar.css?rnd=132"/>
     
@@ -40,7 +40,7 @@ header("Access-Control-Allow-Origin: *");
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Steam Achievements</title>
+    <title>SteamAchievements!</title>
 </head>
 
 <body>     
@@ -159,7 +159,7 @@ header("Access-Control-Allow-Origin: *");
             </div>
 
         </div>   
-        <span id="creditos" style="margin-top:20px; text-align:center" class="texto">Criado por <a style="color:#68b0fd" target="_blank" href="https://www.facebook.com/johnnyqdp">Johnny Quest</a><br><span style="font-size: 10px;">Se tiver bugado me avisa lá no facebook ;)</span></span>   
+        <span id="creditos" style="margin-top:20px; text-align:center" class="texto">Criado por <a style="color:#68b0fd" target="_blank" href="https://steamcommunity.com/id/coffeepills/">CoffeePills</a><br><span style="font-size: 10px;">Se tiver bugado me avisa lá (manda o nome do jogo)</span></span>   
     </div>
     
 
@@ -184,4 +184,4 @@ header("Access-Control-Allow-Origin: *");
 </html>
 <link type="text/css" href="./toastr.css?rnd=132" rel="stylesheet"></link>
 <script src="toastr.js"></script>
-<script type="text/javascript" src="index2.js"></script>
+<script type="text/javascript" src="index2.js?rnd=13782"></script>
