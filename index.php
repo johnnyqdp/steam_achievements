@@ -1,7 +1,3 @@
-<?php 
-header("Access-Control-Allow-Origin: *");
-?>
-
 <!doctype html>
 <html lang="pt-br">
 
@@ -29,9 +25,7 @@ header("Access-Control-Allow-Origin: *");
 	<meta name="msapplication-TileImage" content="favicon-144.png">
     <meta name="msapplication-config" content="browserconfig.xml">
 
-    <link rel="stylesheet" type="text/css" href="./index.css?rnd=13782"></link>
-
-    <link rel="stylesheet" type="text/css" href="./loading-bar.css?rnd=132"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/index.css?rnd=13782"></link>
     
     
     <meta charset="utf-8">
@@ -170,18 +164,17 @@ header("Access-Control-Allow-Origin: *");
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="./loading-bar.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script src="bibliotecasJavascript/bootbox.min.js"></script>
+    <script src="assets/js/libs/bootbox.min.js"></script>
 
 </body>
 
 </html>
-<link type="text/css" href="./toastr.css?rnd=132" rel="stylesheet"></link>
-<script src="toastr.js"></script>
-<script type="text/javascript" src="index2.js?rnd=13782"></script>
+<link type="text/css" href="assets/css/toastr.css?rnd=132" rel="stylesheet"></link>
+<script src="assets/js/libs/toastr.js"></script>
+<script type="text/javascript" src="assets/js/index.js?rnd=13782"></script>
